@@ -16,13 +16,18 @@
 
             security.sudo-rs.enable = true;
 
-            graphics.enable = true;
-            graphics.nvidia.enable = true;
-            graphics.amd.enable = true;
-            laptop.enable = true;
+            hardware = {
+                graphics = {
+                    nvidia.enable = true;
+                    amd.enable = true;
+                };
+
+                bluetooth.enable = true;
+
+                laptop.enable = true;
+            };
 
             pipewire.enable = true;
-            bluetooth.enable = true;
 
             sddm.enable = true;
             hyprland.enable = true;

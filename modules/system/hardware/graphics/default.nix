@@ -1,19 +1,14 @@
 {
     config,
     lib,
-    pkgs,
     ...
-}: {
-    options = {
-        hostSettings.graphics.enable = lib.mkEnableOption "graphics support";
-    };
-
-    config = lib.mkIf config.hostSettings.graphics.enable {
-        hardware = {
-            graphics = {
-                enable = true;
-                enable32Bit = true;
-            };
+}: let
+    cfg = config.hostSettings.hardware.graphics;
+in {
+    config = lib.mkIf (cfg.nvidia.enable || cfg.amd.enable || cfg.virtio.enable) {
+        hardware.graphics = {
+            enable = true;
+            enable32Bit = true;
         };
     };
 }
