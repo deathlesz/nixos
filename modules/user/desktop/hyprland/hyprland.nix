@@ -2,10 +2,9 @@
     config,
     osConfig,
     lib,
-    libM,
     ...
 }: {
-    config = lib.mkIf config.userSettings.hyprland.enable {
+    config = lib.mkIf osConfig.hostSettings.desktop.hyprland.enable {
         wayland.windowManager.hyprland = {
             enable = true;
             package = null;
@@ -13,7 +12,7 @@
             settings = {
                 "$terminal" = "${config.userSettings.terminals.defaultTerminal}";
                 "$fileManager" = "${config.userSettings.terminals.defaultTerminal} --class yazi -- yazi";
-                "$menu" = "rofi -show drun -theme ${config.home.homeDirectory}/.config/rofi/launcher.rasi";
+                "$menu" = "rofi -show drun -theme ${config.xdg.configHome}/rofi/launcher.rasi";
 
                 exec-once = [
                     "waybar"

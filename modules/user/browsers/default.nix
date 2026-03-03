@@ -1,25 +1,17 @@
 {
     config,
     lib,
-    pkgs,
     ...
 }: let
     cfg = config.userSettings.browsers;
+
     browsers = [
         "firefox"
-        "brave"
     ];
-
-    browserPackage =
-        if cfg.defaultBrowser == "none"
-        then null
-        else pkgs."${cfg.defaultBrowser}";
-    desktopFile =
-        if browserPackage == null
-        then null
-        else
-            builtins.head (builtins.filter (file: lib.hasSuffix ".desktop" file)
-                (lib.attrNames (builtins.readDir "${browserPackage}/share/applications")));
+    desktopPath =
+        if (cfg.defaultBrowser != "none")
+        then cfg.${cfg.defaultBrowser}.desktopPath
+        else null;
 in {
     options = {
         userSettings = {
@@ -32,18 +24,17 @@ in {
     };
 
     config = lib.mkIf (cfg.defaultBrowser != "none") {
-        userSettings.browsers = lib.genAttrs browsers (browser:
-            lib.mkIf (cfg.defaultBrowser == browser) {
-                enable = true;
-            });
+        userSettings.browsers.${cfg.defaultBrowser}.enable = true;
 
-        xdg.mimeApps.defaultApplications = lib.mkIf (desktopFile != null) {
-            "x-scheme-handler/http" = desktopFile;
-            "x-scheme-handler/https" = desktopFile;
-            "text/html" = desktopFile;
+        # may be null even if defaultBrowser is not null
+        xdg.mimeApps.defaultApplications = lib.mkIf (desktopPath != null) {
+            "x-scheme-handler/http" = desktopPath;
+            "x-scheme-handler/https" = desktopPath;
+            "text/html" = desktopPath;
+            "application/pdf" = desktopPath;
         };
 
-        home.sessionVariables = lib.mkIf (cfg.defaultBrowser != "none") {
+        home.sessionVariables = {
             BROWSER = "${cfg.defaultBrowser}";
         };
     };

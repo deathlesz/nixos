@@ -1,20 +1,12 @@
 {
-    config,
     osConfig,
     lib,
-    libM,
     pkgs,
     ...
 }: {
-    options = {
-        userSettings = {
-            hyprland.enable = lib.mkEnableOption "Hyprland";
-        };
-    };
-
-    config = lib.mkIf config.userSettings.hyprland.enable {
+    config = lib.mkIf osConfig.hostSettings.desktop.hyprland.enable {
         xdg.portal = {
-            # HACK: ? for some reason `lib.mkForce` is required here
+            # HACK: for some reason `lib.mkForce` is required here
             enable = lib.mkForce true;
             extraPortals = [pkgs.xdg-desktop-portal-hyprland pkgs.xdg-desktop-portal-gtk];
             configPackages = [pkgs.hyprland];
@@ -23,10 +15,9 @@
             };
         };
 
-        services = {
-            hyprpaper.enable = true;
-        };
+        services.hyprpaper.enable = true;
 
+        # screenshotting
         home.packages = with pkgs; [
             grimblast
             satty

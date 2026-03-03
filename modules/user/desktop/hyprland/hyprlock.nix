@@ -1,11 +1,9 @@
 {
-    config,
     osConfig,
     lib,
-    libM,
     ...
 }: {
-    config = lib.mkIf config.userSettings.hyprland.enable {
+    config = lib.mkIf osConfig.hostSettings.desktop.hyprland.enable {
         programs.hyprlock = {
             enable = true;
             settings = {
@@ -31,9 +29,6 @@
 
                 background = {
                     monitor = "";
-                    # NOTE: stylix actually puts itself here
-                    # path = config.stylix.image;
-                    # path = "screenshot";
                     blur_passes = 3;
                 };
 
