@@ -12,7 +12,7 @@ in {
         programs = {
             cava = {
                 enable = true;
-                settings = lib.mkIf osConfig.hostSettings.pipewire.enable {
+                settings = lib.mkIf osConfig.hostSettings.audio.enable {
                     input.method = "pipewire";
                     input.source = "auto";
                     color = {

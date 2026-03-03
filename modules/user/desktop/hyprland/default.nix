@@ -12,11 +12,7 @@
         };
     };
 
-    config = libM.requireHostSettings osConfig {
-        require = ["hyprland" "graphics"];
-        message = "Hyprland must also be enable on the system level";
-    } (lib.mkIf config.userSettings.hyprland.enable {
-        # config = lib.mkIf config.userSettings.hyprland.enable ({
+    config = lib.mkIf config.userSettings.hyprland.enable {
         xdg.portal = {
             # HACK: ? for some reason `lib.mkForce` is required here
             enable = lib.mkForce true;
@@ -52,7 +48,7 @@
                 GTK_USE_PORTALS = 1;
             }
             // (
-                if osConfig.hostSettings.graphics.nvidia.enable
+                if osConfig.hostSettings.hardware.graphics.nvidia.enable
                 then {
                     WLR_NO_HARDWARE_CURSORS = 1;
                     WLR_RENDERER = "vulkan";
@@ -62,5 +58,5 @@
                 }
                 else {}
             );
-    });
+    };
 }

@@ -5,10 +5,7 @@
     libM,
     ...
 }: {
-    config = libM.requireHostSettings osConfig {
-        require = ["hyprland" "graphics"];
-        message = "Hyprland must also be enable on the system level";
-    } (lib.mkIf config.userSettings.hyprland.enable {
+    config = lib.mkIf config.userSettings.hyprland.enable {
         wayland.windowManager.hyprland = {
             enable = true;
             package = null;
@@ -119,7 +116,7 @@
                     swallow_regex = "^(${config.userSettings.terminals.defaultTerminal})$";
                 };
 
-                cursor = lib.mkIf osConfig.hostSettings.graphics.nvidia.enable {
+                cursor = lib.mkIf osConfig.hostSettings.hardware.graphics.nvidia.enable {
                     no_hardware_cursors = 1;
                 };
 
@@ -280,5 +277,5 @@
 
             xwayland.enable = true;
         };
-    });
+    };
 }

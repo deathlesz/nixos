@@ -30,7 +30,7 @@
                     ++ (lib.optional config.hostSettings.kernel.tty0tty.enable "dialout")
                     ++ (lib.optional config.hostSettings.gaming.enable "gamemode")
                     ++ (lib.optional config.hostSettings.virtualization.docker.enable "docker")
-                    ++ (lib.optional config.hostSettings.virtualization.libvirt "libvirtd");
+                    ++ (lib.optional config.hostSettings.virtualization.libvirt.enable "libvirtd");
 
                 createHome = true;
 
@@ -55,7 +55,7 @@
 
         # enable zsh if necessary
         programs.zsh = let
-            zshUsed = builtins.any (user: (! (user ? shell) || user.shell == pkgs.zsh));
+            zshUsed = builtins.any (user: (! (user ? shell) || user.shell == pkgs.zsh)) config.hostSettings.users;
         in
             lib.mkIf zshUsed {
                 enable = true;

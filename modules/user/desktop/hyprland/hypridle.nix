@@ -5,10 +5,7 @@
     libM,
     ...
 }: {
-    config = libM.requireHostSettings osConfig {
-        require = ["hyprland" "graphics"];
-        message = "Hyprland must also be enable on the system level";
-    } (lib.mkIf config.userSettings.hyprland.enable {
+    config = lib.mkIf config.userSettings.hyprland.enable {
         services.hypridle = {
             enable = true;
             settings = {
@@ -20,5 +17,5 @@
                 ];
             };
         };
-    });
+    };
 }

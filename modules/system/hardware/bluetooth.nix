@@ -10,11 +10,6 @@
     };
 
     config = lib.mkIf config.hostSettings.hardware.bluetooth.enable {
-        hardware.bluetooth = {
-            enable = true;
-
-            # NOTE: may break?
-            hsphfpd.enable = true;
-        };
+        hardware.bluetooth.enable = true;
     };
 }

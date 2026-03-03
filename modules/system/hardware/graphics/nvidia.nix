@@ -22,7 +22,7 @@
                 powerManagement.enable = true;
             };
 
-            nvidia-container-toolkit = lib.mkIf config.hostSettings.docker.enable {
+            nvidia-container-toolkit = lib.mkIf config.hostSettings.virtualization.docker.enable {
                 enable = true;
             };
         };

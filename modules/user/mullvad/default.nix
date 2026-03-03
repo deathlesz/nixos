@@ -1,13 +1,12 @@
 {
     osConfig,
     lib,
-    pkgs,
     ...
 }: {
     config = lib.mkIf osConfig.hostSettings.mullvad.enable {
         programs.mullvad-vpn = {
             enable = true;
-            package = pkgs.mullvad-vpn;
+            package = null; # installed by system module
             settings = {
                 autoConnect = true;
                 startMinimized = true;

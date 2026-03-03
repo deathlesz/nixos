@@ -7,28 +7,31 @@
     options = {
         hostSettings = {
             virtualization = {
-                docker.enable = lib.mkEnableOption "Docker support";
                 libvirt.enable = lib.mkEnableOption "libvirt support";
+                docker.enable = lib.mkEnableOption "Docker support";
             };
         };
     };
 
     config = lib.mkMerge [
-        lib.mkif
+        (lib.mkIf
         config.hostSettings.virtualization.libvirt.enable
         {
             virtualisation.libvirtd = {
                 enable = true;
 
-                qemu.package = pkgs.qemu_kvm;
+                qemu = {
+                    package = pkgs.qemu_kvm;
+                    vhostUserPackages = [pkgs.virtiofsd];
+                };
             };
 
             programs.virt-manager.enable = true;
-        }
-        lib.mkIf
+        })
+        (lib.mkIf
         config.hostSettings.virtualization.docker.enable
         {
             virtualisation.docker.enable = true;
-        }
+        })
     ];
 }

@@ -11,8 +11,12 @@
                 tty0tty.enable = true;
             };
 
-            users = ["deathlesz"];
-            adminUsers = ["deathlesz"];
+            users = [
+                {
+                    name = "deathlesz";
+                    isAdmin = true;
+                }
+            ];
 
             security.sudo-rs.enable = true;
 
@@ -27,13 +31,15 @@
                 laptop.enable = true;
             };
 
-            pipewire.enable = true;
+            audio.enable = true;
 
             sddm.enable = true;
-            hyprland.enable = true;
+            desktop.hyprland.enable = true;
 
-            docker.enable = true;
-            virtualization.enable = true;
+            virtualization = {
+                libvirt.enable = true;
+                docker.enable = true;
+            };
 
             mullvad.enable = true;
 
