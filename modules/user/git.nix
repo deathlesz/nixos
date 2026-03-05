@@ -5,7 +5,7 @@
 }: {
     options = {
         userSettings = {
-            git.enable = lib.mkEnableOption "git";
+            git.enable = lib.mkEnableOption "Git";
         };
     };
 

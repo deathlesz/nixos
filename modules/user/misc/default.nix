@@ -11,6 +11,10 @@
         };
     };
 
+    imports = [
+        ./music.nix
+    ];
+
     config = lib.mkIf config.userSettings.misc.enable {
         programs = {
             feh.enable = true;

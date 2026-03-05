@@ -4,11 +4,14 @@
     pkgs,
     ...
 }: {
+    imports = [
+        ./rofi.nix
+        ./waybar.nix
+    ];
+
     config = lib.mkIf config.userSettings.hyprland.enable {
         home.packages = with pkgs; [
             wl-clipboard
-            grim
-            slurp
         ];
 
         programs.yazi = {

@@ -2,20 +2,17 @@
     config,
     lib,
     pkgs,
-    inputs,
     ...
 }: {
     options = {
         userSettings = {
-            security.enable = lib.mkEnableOption "secrets storage";
+            security.enable = lib.mkEnableOption "security features";
         };
     };
 
     config = lib.mkIf config.userSettings.security.enable {
         programs = {
-            gpg = {
-                enable = true;
-            };
+            gpg.enable = true;
             ssh = {
                 enable = true;
                 enableDefaultConfig = false;

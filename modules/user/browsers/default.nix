@@ -8,6 +8,7 @@
     browsers = [
         "firefox"
     ];
+
     desktopPath =
         if (cfg.defaultBrowser != "none")
         then cfg.${cfg.defaultBrowser}.desktopPath
@@ -23,10 +24,14 @@ in {
         };
     };
 
+    imports = [
+        ./firefox.nix
+    ];
+
     config = lib.mkIf (cfg.defaultBrowser != "none") {
         userSettings.browsers.${cfg.defaultBrowser}.enable = true;
 
-        # may be null even if defaultBrowser is not null
+        # may be null even if defaultBrowser is not null, so we check
         xdg.mimeApps.defaultApplications = lib.mkIf (desktopPath != null) {
             "x-scheme-handler/http" = desktopPath;
             "x-scheme-handler/https" = desktopPath;
