@@ -5,15 +5,16 @@
 }: let
     cfg = config.userSettings.browsers;
 
-    browsers = [
-        "firefox"
-    ];
+    imports = lib.attrNames (lib.filterAttrs (name: value: (value != "directory") && (name != "default.nix")) (builtins.readDir ./.));
+    browsers = map (lib.removeSuffix ".nix") imports;
 
-    desktopPath =
+    path =
         if (cfg.defaultBrowser != "none")
-        then cfg.${cfg.defaultBrowser}.desktopPath
+        then cfg.${cfg.defaultBrowser}.path
         else null;
 in {
+    inherit imports;
+
     options = {
         userSettings = {
             browsers.defaultBrowser = lib.mkOption {
@@ -24,19 +25,15 @@ in {
         };
     };
 
-    imports = [
-        ./firefox.nix
-    ];
-
     config = lib.mkIf (cfg.defaultBrowser != "none") {
         userSettings.browsers.${cfg.defaultBrowser}.enable = true;
 
         # may be null even if defaultBrowser is not null, so we check
-        xdg.mimeApps.defaultApplications = lib.mkIf (desktopPath != null) {
-            "x-scheme-handler/http" = desktopPath;
-            "x-scheme-handler/https" = desktopPath;
-            "text/html" = desktopPath;
-            "application/pdf" = desktopPath;
+        xdg.mimeApps.defaultApplications = lib.mkIf (path != null) {
+            "x-scheme-handler/http" = path;
+            "x-scheme-handler/https" = path;
+            "text/html" = path;
+            "application/pdf" = path;
         };
 
         home.sessionVariables = {

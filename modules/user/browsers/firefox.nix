@@ -11,7 +11,7 @@ in {
         userSettings = {
             browsers.firefox = {
                 enable = lib.mkEnableOption "Firefox";
-                desktopPath = lib.mkOption {
+                path = lib.mkOption {
                     default = "${package}/share/applications/firefox.desktop";
                     internal = true;
                     visible = false;

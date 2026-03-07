@@ -2,5 +2,6 @@
     imports = [
         ./common
         ./hyprland
+        ./niri
     ];
 }
