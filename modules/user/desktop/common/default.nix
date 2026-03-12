@@ -1,5 +1,5 @@
 {
-    config,
+    osConfig,
     lib,
     pkgs,
     ...
@@ -9,7 +9,7 @@
         ./waybar.nix
     ];
 
-    config = lib.mkIf config.userSettings.hyprland.enable {
+    config = lib.mkIf osConfig.hostSettings.desktop.enable {
         home.packages = with pkgs; [
             wl-clipboard
         ];

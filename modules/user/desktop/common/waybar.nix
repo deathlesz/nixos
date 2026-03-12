@@ -1,9 +1,10 @@
 {
     config,
     lib,
+    osConfig,
     ...
 }: {
-    config = lib.mkIf config.userSettings.hyprland.enable {
+    config = lib.mkIf osConfig.hostSettings.desktop.enable {
         programs.waybar = {
             enable = true;
 
