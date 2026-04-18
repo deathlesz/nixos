@@ -119,7 +119,10 @@
 
         networking = {
             networkmanager.enable = true;
-            firewall.enable = false;
+            firewall = {
+                enable = false;
+                checkReversePath = false;
+            };
         };
         services.fstrim.enable = true;
     };
