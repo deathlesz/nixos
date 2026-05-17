@@ -2,12 +2,15 @@
     config,
     lib,
     nixvimLib,
+    pkgs,
     ...
 }: {
     config.programs.nixvim = lib.mkIf config.userSettings.nixvim.enable {
         plugins.lsp = {
             enable = true;
             servers = {
+                bash_ls.enable = true;
+
                 helm_ls.enable = true;
                 terraformls.enable = true;
                 yamlls.enable = true;
@@ -50,6 +53,12 @@
 
                 ty.enable = true;
                 ruff.enable = true;
+
+                ansiblels = {
+                    enable = true;
+                    package = pkgs.ansible-language-server;
+                };
+                bash_ls.enable = true;
             };
             keymaps = [
                 {

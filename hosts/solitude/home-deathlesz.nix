@@ -1,4 +1,5 @@
 {
+    config,
     lib,
     pkgs,
     ...
@@ -100,9 +101,17 @@ in {
             obsidian.enable = true;
             vesktop.enable = true;
 
+            # firefox.policies = {
+            #     WebsiteFilter = {
+            #         Block = ["*://chatgpt.com/*" "*://gemini.google.com/*" "*://arena.ai/*"];
+            #     };
+            # };
+
             zsh.initContent = lib.mkAfter ''
                 ${quote}/bin/quote
             '';
+
+            firefox.configPath = "${config.xdg.configHome}/mozilla/firefox";
         };
 
         home.packages = with pkgs; [
@@ -127,6 +136,8 @@ in {
             ls = "eza --color=always";
             cat = "bat";
             ".." = "cd ..";
+
+            "k" = "kubectl";
         };
 
         home.stateVersion = "25.05";

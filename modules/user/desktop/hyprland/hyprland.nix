@@ -9,6 +9,7 @@
             enable = true;
             package = null;
             portalPackage = null;
+            configType = "hyprlang"; # NOTE: `lua` is unstable for now
             settings = {
                 "$browser" = "${config.userSettings.browsers.defaultBrowser}";
                 "$terminal" = "${config.userSettings.terminals.defaultTerminal}";
@@ -97,7 +98,6 @@
                 };
 
                 dwindle = {
-                    pseudotile = true;
                     preserve_split = true;
                 };
 

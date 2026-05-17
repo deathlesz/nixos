@@ -7,8 +7,6 @@
                     variant = "lto";
                     arch = "x86_64-v3";
                 };
-
-                tty0tty.enable = true;
             };
 
             users = [
@@ -50,9 +48,9 @@
             styling = {
                 enable = true;
 
-                theme = "catppuccin-mocha";
+                theme = "everforest-medium";
 
-                plymouth.enable = true;
+                plymouth.enable = false;
                 plymouth.theme = "arasaka";
 
                 grub.theme = "cybergrub-2077";

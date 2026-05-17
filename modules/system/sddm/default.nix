@@ -74,6 +74,11 @@ in {
             wayland.enable = true;
             autoNumlock = true;
             theme = "${theme}/share/sddm/themes/sddm-astronaut-theme";
+            settings = lib.mkIf config.hostSettings.desktop.hyprland.enable {
+                General = {
+                    DefaultSession = "hyprland.desktop";
+                };
+            };
             extraPackages = [
                 theme
             ];

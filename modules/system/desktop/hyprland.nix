@@ -10,6 +10,9 @@
     };
 
     config = lib.mkIf config.hostSettings.desktop.hyprland.enable {
-        programs.hyprland.enable = true;
+        programs.hyprland = {
+            enable = true;
+            withUWSM = false;
+        };
     };
 }
