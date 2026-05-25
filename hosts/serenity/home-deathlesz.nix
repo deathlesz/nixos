@@ -1,4 +1,5 @@
 {
+    config,
     lib,
     pkgs,
     ...
@@ -63,16 +64,20 @@ in {
             misc.enable = true;
         };
 
-        programs.git = {
-            settings.user = {
-                name = "Deathlesz";
-                email = "deathless.mcd@gmail.com";
+        programs = {
+            git = {
+                settings.user = {
+                    name = "Deathlesz";
+                    email = "deathless.mcd@gmail.com";
+                };
+
+                signing = {
+                    key = gpgKeyId;
+                    signByDefault = true;
+                };
             };
 
-            signing = {
-                key = gpgKeyId;
-                signByDefault = true;
-            };
+            firefox.configPath = "${config.xdg.configHome}/mozilla/firefox";
         };
 
         wayland.windowManager.hyprland.settings = {

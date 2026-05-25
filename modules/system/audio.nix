@@ -24,6 +24,8 @@
             playerctld.enable = true;
         };
 
+        hardware.enableAllFirmware = true;
+
         environment.systemPackages = with pkgs; [
             pavucontrol
         ];
