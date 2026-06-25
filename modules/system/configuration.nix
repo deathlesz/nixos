@@ -51,6 +51,12 @@
 
             ntfs3g
             xxd
+
+            jq
+            dig
+            bind # nslookup
+            file
+            killall
         ];
 
         programs.nh = {
