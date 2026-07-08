@@ -9,11 +9,11 @@
             settings = {
                 profile = [
                     {
-                        time = "07:30";
+                        time = "05:00";
                         identity = true;
                     }
                     {
-                        time = "20:00";
+                        time = "23:00";
                         temperature = 4800;
                     }
                 ];

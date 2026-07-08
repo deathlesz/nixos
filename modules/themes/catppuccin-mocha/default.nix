@@ -22,4 +22,12 @@
     base0D = "89b4fa";
     base0E = "cba6f7";
     base0F = "f2cdcd";
+    base10 = "181825";
+    base11 = "11111b";
+    base12 = "eba0ac";
+    base13 = "f5e0dc";
+    base14 = "a6e3a1";
+    base15 = "89dceb";
+    base16 = "74c7ec";
+    base17 = "f5c2e7";
 }
