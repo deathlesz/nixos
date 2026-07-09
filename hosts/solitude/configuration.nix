@@ -48,10 +48,12 @@
             styling = {
                 enable = true;
 
-                theme = "everforest-medium";
+                theme = "catppuccin-mocha";
 
-                plymouth.enable = false;
-                plymouth.theme = "arasaka";
+                plymouth = {
+                    enable = false;
+                    theme = "arasaka";
+                };
 
                 grub.theme = "cybergrub-2077";
             };
@@ -71,6 +73,15 @@
 
             supergfxd.enable = true;
             asusd.enable = true;
+
+            minidlna = {
+                enable = true;
+                openFirewall = true;
+                settings = {
+                    media_dir = ["V,/media/videos"];
+                    inotify = "yes";
+                };
+            };
         };
 
         system.stateVersion = "25.05";

@@ -35,6 +35,8 @@
                     vim
                     vimdoc
 
+                    groovy
+
                     markdown
                     markdown-inline
                     typst

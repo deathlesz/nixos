@@ -53,34 +53,21 @@ in {
             xdg.enable = true;
 
             nixvim.enable = true;
-            idea.enable = true;
 
-            browsers.defaultBrowser = "firefox";
-            browsers.firefox.enable = true;
+            browsers = {
+                defaultBrowser = "firefox";
+                firefox.enable = true;
+            };
 
-            terminals.defaultTerminal = "kitty";
-            terminals.kitty.enable = true;
+            terminals = {
+                defaultTerminal = "kitty";
+                kitty.enable = true;
+            };
 
             security.enable = true;
             git.enable = true;
 
             misc.enable = true;
-        };
-
-        programs.git = {
-            settings.user = {
-                name = "Deathlesz";
-                email = "deathless.mcd@gmail.com";
-            };
-
-            signing = {
-                key = gpgKeyId;
-                signByDefault = true;
-            };
-        };
-
-        home.sessionVariables = {
-            AQ_DRM_DEVICES = "/dev/dri/amd-igpu";
         };
 
         wayland.windowManager.hyprland.settings = {
@@ -98,48 +85,66 @@ in {
         };
 
         programs = {
-            obsidian.enable = true;
-            vesktop.enable = true;
+            git = {
+                settings.user = {
+                    name = "Deathlesz";
+                    email = "deathless.mcd@gmail.com";
+                };
 
-            # firefox.policies = {
-            #     WebsiteFilter = {
-            #         Block = ["*://chatgpt.com/*" "*://gemini.google.com/*" "*://arena.ai/*"];
-            #     };
-            # };
+                signing = {
+                    key = gpgKeyId;
+                    signByDefault = true;
+                };
+            };
 
             zsh.initContent = lib.mkAfter ''
                 ${quote}/bin/quote
             '';
 
             firefox.configPath = "${config.xdg.configHome}/mozilla/firefox";
+            # firefox.policies = {
+            #     WebsiteFilter = {
+            #         Block = ["*://chatgpt.com/*" "*://gemini.google.com/*" "*://arena.ai/*"];
+            #     };
+            # };
+
+            obsidian.enable = true;
+            vesktop.enable = true;
         };
 
-        home.packages = with pkgs; [
-            qbittorrent
+        home = {
+            packages = with pkgs; [
+                bitwarden-desktop
 
-            dosbox-staging
+                qbittorrent
 
-            telegram-desktop
+                telegram-desktop
 
-            libreoffice-qt-fresh
-            hunspell
-            hunspellDicts.ru_RU
-            hunspellDicts.en_US-large
+                libreoffice-qt-fresh
+                hunspell
+                hunspellDicts.ru_RU
+                hunspellDicts.en_US-large
 
-            hyphenDicts.ru_RU
-            hyphenDicts.en_US
+                hyphenDicts.ru_RU
+                hyphenDicts.en_US
 
-            prismlauncher
-        ];
+                prismlauncher
+            ];
 
-        home.shellAliases = {
-            ls = "eza --color=always";
-            cat = "bat";
-            ".." = "cd ..";
+            shellAliases = {
+                ls = "eza --color=always";
+                cat = "bat";
+                ".." = "cd ..";
 
-            "k" = "kubectl";
+                "k" = "kubectl";
+                "tf" = "terraform";
+            };
+
+            sessionVariables = {
+                AQ_DRM_DEVICES = "/dev/dri/amd-igpu";
+            };
+
+            stateVersion = "25.05";
         };
-
-        home.stateVersion = "25.05";
     };
 }
