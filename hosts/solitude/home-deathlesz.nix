@@ -87,8 +87,8 @@ in {
         programs = {
             git = {
                 settings.user = {
-                    name = "Deathlesz";
-                    email = "deathless.mcd@gmail.com";
+                    name = "Raman Lahutsik";
+                    email = "72507505+deathlesz@users.noreply.github.com";
                 };
 
                 signing = {

@@ -3,6 +3,7 @@
     lib,
     pkgs,
     inputs,
+    system,
     ...
 }: {
     # generally default values, can be changed by specific hosts
@@ -57,6 +58,8 @@
             bind # nslookup
             file
             killall
+
+            inputs.alejandra.defaultPackage.${system}
         ];
 
         programs.nh = {

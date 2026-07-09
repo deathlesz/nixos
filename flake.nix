@@ -57,18 +57,6 @@
             };
         })
         hosts);
-
-        devShells."${system}".default = let
-            pkgs = import inputs.nixpkgs {
-                inherit system;
-            };
-        in
-            pkgs.mkShell {
-                packages = with pkgs; [
-                    nixd
-                    inputs.alejandra.defaultPackage.${system}
-                ];
-            };
     };
 
     inputs = {
