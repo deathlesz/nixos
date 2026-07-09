@@ -4,7 +4,9 @@
     pkgs,
     osConfig,
     ...
-}: {
+}: let
+    cfg = config.userSettings.styling.cursor;
+in {
     options = {
         userSettings = {
             styling.cursor = {
@@ -29,11 +31,23 @@
     };
 
     config = lib.mkIf osConfig.hostSettings.styling.enable {
-        gtk.cursorTheme = config.userSettings.styling.cursor;
+        home.pointerCursor = {
+            enable = true;
 
-        home.sessionVariables = {
-            XCURSOR_THEME = config.userSettings.styling.cursor.name;
-            XCURSOR_SIZE = config.userSettings.styling.cursor.size;
+            name = cfg.name;
+            # set by Stylix
+            # package = cfg.package
+            size = cfg.size;
+
+            gtk = {
+                enable = true;
+            };
+            hyprcursor = {
+                enable = lib.mkIf osConfig.hostSettings.desktop.hyprland.enable true;
+            };
+            x11 = {
+                enable = true;
+            };
         };
     };
 }

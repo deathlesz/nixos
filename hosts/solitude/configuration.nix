@@ -84,6 +84,12 @@
             };
         };
 
+        networking.extraHosts = ''
+            136.119.69.230 control-plane-0
+            34.27.99.68 worker-0
+            104.197.71.185 worker-1
+        '';
+
         system.stateVersion = "25.05";
     };
 }

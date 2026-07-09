@@ -23,7 +23,12 @@
                 modules = [
                     {
                         nixpkgs = {
-                            config = {allowUnfree = true;};
+                            config = {
+                                allowUnfree = true;
+                                permittedInsecurePackages = [
+                                    "electron-39.8.10"
+                                ];
+                            };
                             overlays = [inputs.nix-firefox-addons.overlays.default inputs.nix-cachyos-kernel.overlays.pinned];
                         };
                     }
@@ -71,10 +76,7 @@
             url = "github:nix-community/stylix";
             inputs.nixpkgs.follows = "nixpkgs";
         };
-        nixvim = {
-            url = "github:nix-community/nixvim";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
+        nixvim.url = "github:nix-community/nixvim";
         niri = {
             url = "github:sodiboo/niri-flake";
             inputs.nixpkgs.follows = "nixpkgs";

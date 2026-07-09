@@ -9,7 +9,7 @@
         plugins.lsp = {
             enable = true;
             servers = {
-                bash_ls.enable = true;
+                bashls.enable = true;
 
                 helm_ls.enable = true;
                 terraformls.enable = true;
@@ -58,7 +58,7 @@
                     enable = true;
                     package = pkgs.ansible-language-server;
                 };
-                bash_ls.enable = true;
+                bashls.enable = true;
             };
             keymaps = [
                 {
